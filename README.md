@@ -1,9 +1,10 @@
 ## Setup
 
+This setup process assumes you have Python 3 available on a Unix or Unix-like system (MacOS, Linux, or BSD)
+
 ```bash
 git clone https://github.com/seisvelas/S3-Exif-Cleaner.git && cd S3-Exif-Cleaner
 pip3 install -r requirements.txt
-chmo
 ```
 
 Note: Pillow dependency breaks on Apple Silicon, to make it work follow the instructions here:
@@ -20,7 +21,7 @@ That's it, you're ready to start!
 ## Usage
 
 ```bash
-alex@mac s3_exif_cleanser % python3 s3_cleanse.py -h
+alex@mac s3_exif_cleanser % python s3_cleanse.py -h
 usage: s3_cleanse.py [-h] [-b BUCKET] [-p PREFIX]
 
 optional arguments:
