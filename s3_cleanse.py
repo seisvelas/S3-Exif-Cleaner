@@ -33,7 +33,14 @@ for obj in bucket.objects.filter(Prefix=args.prefix):
             # Transpose image per EXIF data, then scrub
             img_bytes_NO_exif = BytesIO()
             img_ops = Image.open(img_bytes_exif)
+            # exif data includes orientation image
+            # without which the image may end up rotated
+            # incorrectly. So we rotate the image per
+            # the exif data before scrubbing it.
             img_ops = ImageOps.exif_transpose(img_ops)
+            # img_ops.save implicitly excludes EXIF data
+            # unless you explicitly tell it not to via the
+            # exif parameter
             img_ops.save(img_bytes_NO_exif, format='jpeg')
 
             # Overwrite original image w/ scrubbed version
