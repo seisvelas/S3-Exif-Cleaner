@@ -22,7 +22,7 @@ That's it, you're ready to start!
 
 ```bash
 alex@mac s3_exif_cleanser % python s3_cleanse.py -h
-usage: s3_cleanse.py [-h] [-b BUCKET] [-p PREFIX]
+usage: s3_cleanse.py [-h] [-b BUCKET] [-p PREFIX] [-i]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -30,6 +30,7 @@ optional arguments:
                         Name of S3 bucket
   -p PREFIX, --prefix PREFIX
                         (optional) Only wash images starting with this prefix
+  -i, --interactive     (optional) Ask user to confirm each object before altering it
 ```
 
 Let's say you want to wash images in a bucket called `myBusiness`, but only wanted to wash images in the `embarassingPhotos/` prefix. In that case, you'd invoke `s3_exif_cleanser` like so:
