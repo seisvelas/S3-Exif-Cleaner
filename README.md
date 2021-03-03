@@ -1,4 +1,4 @@
-### Setup
+## Setup
 
 ```bash
 git clone https://github.com/seisvelas/S3-Exif-Cleaner.git && cd S3-Exif-Cleaner
@@ -17,7 +17,7 @@ Now put your AWS information into .env (`API_KEY_AWS_S3_ID` & `API_KEY_AWS_S3_SE
 
 That's it, you're ready to start!
 
-### Usage
+## Usage
 
 ```bash
 alex@mac s3_exif_cleanser % python3 s3_cleanse.py -h
