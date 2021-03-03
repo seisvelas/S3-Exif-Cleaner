@@ -9,8 +9,12 @@ import argparse
 
 # Get bucket name and prefix from 
 parser = argparse.ArgumentParser()
-parser.add_argument('-b', '--bucket', default='flowcrypt-test' help='foo help')
-parser.add_argument('-p', '--prefix', default='', help='foo help')
+parser.add_argument(
+    '-b', '--bucket', default='flowcrypt-test', 
+    help='Name of S3 bucket')
+parser.add_argument(
+    '-p', '--prefix', default='', 
+    help='(optional) Only wash images starting with this prefix')
 args = parser.parse_args()
 
 s3 = boto3.resource('s3',
