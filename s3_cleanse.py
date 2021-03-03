@@ -15,6 +15,9 @@ parser.add_argument(
 parser.add_argument(
     '-p', '--prefix', default='', 
     help='(optional) Only wash images starting with this prefix')
+parser.add_argument(
+    '-i', '--interactive', action='store_true', 
+    help='(optional) Ask user to confirm each object before altering it')
 args = parser.parse_args()
 
 s3 = boto3.resource('s3',
@@ -27,7 +30,13 @@ scrubbed_files_count = 0
 for obj in bucket.objects.filter(Prefix=args.prefix):
     if 'jpg' in obj.key:
         try:
-            print(f'Cleansing EXIF data on: {obj.key}')
+            obj_url = f'https://{args.bucket}.s3.amazonaws.com/{obj.key}'
+            if args.interactive:
+                prompt = f'Replace object at {obj_url} with scrubbed version? (Y/n) '
+                if input(prompt).lower() != 'y':
+                    continue
+
+            print(f'Cleansing EXIF data on: {obj_url}')
 
             # Download image as raw bytes
             img_bytes_exif = BytesIO()
@@ -49,7 +58,7 @@ for obj in bucket.objects.filter(Prefix=args.prefix):
 
             # Overwrite original image w/ scrubbed version
             img_bytes_NO_exif.seek(0)
-            s3.meta.client.upload_fileobj(img_bytes_NO_exif, bucket_name, obj.key)
+            s3.meta.client.upload_fileobj(img_bytes_NO_exif, args.bucket, obj.key)
             scrubbed_files_count += 1
 
         except UnidentifiedImageError:
