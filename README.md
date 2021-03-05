@@ -21,7 +21,7 @@ That's it, you're ready to start!
 ## Usage
 
 ```bash
-alex@mac s3_exif_cleanser % python s3_cleanse.py -h
+alex@mac s3_exif_cleanser % python3 s3_cleanse.py -h
 usage: s3_cleanse.py [-h] [-b BUCKET] [-p PREFIX] [-i]
 
 optional arguments:
