@@ -1,2 +1,2 @@
-Pillow
+Pillow==8.1.1
 boto3
