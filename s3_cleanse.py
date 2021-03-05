@@ -32,8 +32,8 @@ for obj in bucket.objects.filter(Prefix=args.prefix):
         try:
             obj_url = f'https://{args.bucket}.s3.amazonaws.com/{obj.key}'
             if args.interactive:
-                prompt = f'Replace object at {obj_url} with scrubbed version? (Y/n) '
-                if input(prompt).lower() != 'y':
+                prompt = f'Replace object at {obj_url} with scrubbed version? (Y or enter to confirm) '
+                if input(prompt).lower() in ['y', '']:
                     continue
 
             print(f'Cleansing EXIF data on: {obj_url}')
