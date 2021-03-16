@@ -10,11 +10,13 @@ pip3 install -r requirements.txt
 Note: Pillow dependency breaks on Apple Silicon, to make it work follow the instructions here:
 https://github.com/python-pillow/Pillow/issues/5093
 
+If you don't already have your aws credentials configured in $HOME/.aws/credentials, then you will need either enter them there, or put them in a .env file in this directory and make them available by running the remaining instructions:
+
 ```bash
 mv .env.example .env
 ```
 
-Now put your AWS information into .env (`API_KEY_AWS_S3_ID` & `API_KEY_AWS_S3_SECRET`).
+Now put your AWS information into .env (`API_KEY_AWS_S3_ID` & `API_KEY_AWS_S3_SECRET`) and run `source .env`
 
 That's it, you're ready to start!
 

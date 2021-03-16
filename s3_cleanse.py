@@ -20,10 +20,20 @@ parser.add_argument(
     help='(optional) Ask user to confirm each object before altering it')
 args = parser.parse_args()
 
-s3 = boto3.resource('s3',
-    aws_access_key_id=environ['API_KEY_AWS_S3_ID'],
-    aws_secret_access_key= environ['API_KEY_AWS_S3_SECRET']
-)
+try:
+    print('loading credentials from default configuration file ($HOME/.aws/credentials)...')
+    s3 = boto3.resource('s3',
+        #aws_access_key_id=environ['API_KEY_AWS_S3_ID'],
+        #aws_secret_access_key= environ['API_KEY_AWS_S3_SECRET']
+    )
+    print(s3.meta.client.head_bucket(Bucket=s3.name))
+except AttributeError:
+    print('failed, attempting to load from local directory .env file...')
+    s3 = boto3.resource('s3',
+        aws_access_key_id=environ['API_KEY_AWS_S3_ID'],
+        aws_secret_access_key= environ['API_KEY_AWS_S3_SECRET']
+    )
+
 bucket = s3.Bucket(args.bucket)
 scrubbed_files_count = 0
 
